@@ -1,0 +1,154 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.demo-card {
+  position: relative;
+  background: $color-bg-card;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border-radius: $radius-xl;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  cursor: default;
+
+  // ── Animated Gradient Border ──
+  &__border {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.3),
+      rgba(139, 92, 246, 0.3),
+      rgba(34, 211, 238, 0.3),
+      rgba(0, 212, 255, 0.3)
+    );
+    background-size: 300% 300%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: gradient-shift 4s ease-in-out infinite;
+    transition: opacity $transition-slow;
+    opacity: 0.4;
+
+    .demo-card:hover & {
+      opacity: 1;
+      animation-duration: 2s;
+    }
+  }
+
+  // ── Content ──
+  &__content {
+    position: relative;
+    z-index: 1;
+    padding: $spacing-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  // ── Header ──
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__category {
+    font-family: $font-accent;
+    font-size: $font-size-2xs;
+    color: $color-neon-blue;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wider;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-family: $font-primary;
+    font-size: $font-size-2xs;
+    font-weight: $font-weight-semibold;
+    color: var(--status-color);
+  }
+
+  &__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: $radius-full;
+    background: var(--status-color);
+    box-shadow: 0 0 8px var(--status-color);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  // ── Icon ──
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-md;
+    background: rgba($color-neon-blue, 0.1);
+    color: $color-neon-blue;
+    box-shadow: $glow-primary-sm;
+    margin-bottom: $spacing-sm;
+  }
+
+  // ── Title ──
+  &__title {
+    font-family: $font-display;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-heading;
+    line-height: $line-height-tight;
+  }
+
+  // ── Description ──
+  &__description {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+    font-weight: $font-weight-light;
+    @include truncate(3);
+  }
+
+  // ── Tech Stack ──
+  &__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    margin-top: auto;
+  }
+
+  &__tech-item {
+    display: inline-flex;
+    padding: $spacing-2xs $spacing-sm;
+    font-family: $font-primary;
+    font-size: $font-size-2xs;
+    color: $color-text-secondary;
+    background: rgba($color-neon-blue, 0.06);
+    border: 1px solid rgba($color-neon-blue, 0.1);
+    border-radius: $radius-xs;
+    font-weight: $font-weight-medium;
+
+    &--more {
+      color: $color-neon-blue;
+      border-color: rgba($color-neon-blue, 0.2);
+    }
+  }
+
+  // ── Actions ──
+  &__actions {
+    padding-top: $spacing-sm;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

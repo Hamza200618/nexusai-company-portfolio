@@ -1,0 +1,115 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.about-page {
+  .about-header {
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    padding: 80px $spacing-md 0;
+
+    @include respond(md) {
+      min-height: 50vh;
+      padding: 80px 0 0;
+    }
+
+    &__content {
+      max-width: 700px;
+    }
+  }
+
+  .about-story {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
+    align-items: center;
+
+    @include respond(md) {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-4xl;
+    }
+
+    &__content {
+      p {
+        font-family: $font-primary;
+        font-size: $font-size-base;
+        color: $color-text-secondary;
+        line-height: $line-height-relaxed;
+        margin-bottom: $spacing-lg;
+        font-weight: $font-weight-light;
+      }
+
+      .btn {
+        margin-top: $spacing-md;
+        width: 100%;
+
+        @include respond(md) {
+          width: auto;
+        }
+      }
+    }
+
+    &__image {
+      @include respond(md) {
+        order: 1;
+      }
+    }
+
+    &__placeholder {
+      @include card-premium;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-md;
+      color: $color-text-muted;
+      font-size: $font-size-sm;
+      padding: $spacing-xl;
+    }
+  }
+
+  .about-values {
+    text-align: center;
+
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-md;
+      margin-top: $spacing-2xl;
+
+      @include respond(md) {
+        gap: $spacing-xl;
+      }
+
+      @include respond(lg) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    &__card {
+      @include card-premium;
+      padding: $spacing-lg;
+      text-align: left;
+
+      @include respond(md) {
+        padding: $spacing-xl;
+      }
+
+      h3 {
+        font-family: $font-display;
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-sm;
+        color: $color-neon-blue;
+      }
+
+      p {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        line-height: $line-height-relaxed;
+        font-weight: $font-weight-light;
+      }
+    }
+  }
+}

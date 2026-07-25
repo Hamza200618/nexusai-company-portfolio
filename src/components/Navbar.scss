@@ -1,0 +1,292 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-navbar;
+  padding: $spacing-sm 0;
+  transition: all $transition-smooth;
+  background: transparent;
+
+  @include respond(md) {
+    padding: $spacing-lg 0;
+  }
+
+  // ── Scrolled ──
+  &--scrolled {
+    background: rgba($color-bg, 0.8);
+    backdrop-filter: blur($glass-blur-xl);
+    -webkit-backdrop-filter: blur($glass-blur-xl);
+    border-bottom: 1px solid $color-border;
+    box-shadow: $shadow-glass, $shadow-glow-primary;
+    padding: $spacing-xs 0;
+
+    @include respond(md) {
+      padding: $spacing-sm 0;
+    }
+  }
+
+  &__container {
+    @include flex-between;
+    position: relative;
+  }
+
+  // ── Logo ──
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    text-decoration: none;
+    position: relative;
+    z-index: $z-dropdown + 1;
+    flex-shrink: 0;
+  }
+
+  &__logo-img {
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-sm;
+    object-fit: cover;
+    box-shadow: $glow-primary-sm;
+    transition: all $transition-base;
+
+    @include respond(md) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__logo-text {
+    font-family: $font-display;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    @include gradient-text;
+    transition: font-size $transition-base;
+
+    @include respond(md) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  // ── Hamburger (always on mobile) ──
+  &__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    z-index: $z-dropdown + 1;
+    position: relative;
+    margin-left: auto;
+    background: none;
+    border: none;
+
+    @include respond(md) {
+      display: none;
+    }
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: $color-text;
+      border-radius: $radius-full;
+      transition: all $transition-base;
+
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+    }
+
+    &--active {
+      span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      span:nth-child(2) {
+        opacity: 0;
+      }
+      span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+  }
+
+  // ── Desktop Menu ──
+  &__menu {
+    display: none;
+
+    @include respond(md) {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xl;
+      position: static;
+      width: auto;
+      height: auto;
+      background: none;
+      backdrop-filter: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    // Mobile: slide-in panel
+    @media (max-width: 767px) {
+      display: flex;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 75vw;
+      max-width: 320px;
+      height: 100vh;
+      height: 100dvh;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: 90px $spacing-lg $spacing-xl;
+      background: rgba($color-bg-alt, 0.96);
+      backdrop-filter: blur($glass-blur-xl);
+      -webkit-backdrop-filter: blur($glass-blur-xl);
+      border-left: 1px solid $color-border;
+      box-shadow: $shadow-xl;
+      transition: right $transition-smooth;
+      z-index: $z-modal - 1;
+      gap: 0;
+
+      &--open {
+        right: 0;
+      }
+    }
+  }
+
+  // ── Links ──
+  &__links {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0;
+
+    @include respond(md) {
+      flex-direction: row;
+      align-items: center;
+      gap: $spacing-lg;
+      width: auto;
+    }
+
+    li {
+      width: 100%;
+
+      @include respond(md) {
+        width: auto;
+      }
+    }
+  }
+
+  // ── Link ──
+  &__link {
+    font-family: $font-primary;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    transition: all $transition-base;
+    position: relative;
+    padding: $spacing-md 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    width: 100%;
+    border-bottom: 1px solid $color-border-subtle;
+
+    @include respond(md) {
+      font-size: $font-size-sm;
+      padding: $spacing-sm $spacing-sm;
+      width: auto;
+      border-bottom: none;
+      letter-spacing: $letter-spacing-wide;
+    }
+
+    &-indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: $radius-full;
+      background: $color-neon-blue;
+      opacity: 0;
+      transform: scale(0);
+      transition: all $transition-base;
+      box-shadow: $glow-primary-sm;
+
+      @include respond(md) {
+        width: 4px;
+        height: 4px;
+      }
+    }
+
+    // Desktop underline indicator
+    @include respond(md) {
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 60%;
+        height: 1.5px;
+        background: $gradient-primary;
+        transition: transform $transition-base;
+        border-radius: $radius-full;
+        box-shadow: $glow-primary-sm;
+      }
+    }
+
+    &:hover {
+      color: $color-text;
+
+      @include respond(md) {
+        &::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+      }
+    }
+
+    &--active {
+      color: $color-neon-blue;
+
+      .navbar__link-indicator {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      @include respond(md) {
+        &::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+      }
+    }
+  }
+
+  // ── Actions (Let's Talk button) ──
+  &__actions {
+    display: flex;
+    width: 100%;
+    margin-top: $spacing-xl;
+
+    @include respond(md) {
+      display: flex;
+      width: auto;
+      margin-top: 0;
+    }
+
+    .btn {
+      width: 100%;
+
+      @include respond(md) {
+        width: auto;
+      }
+    }
+  }
+}

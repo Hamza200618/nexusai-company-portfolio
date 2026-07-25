@@ -1,0 +1,76 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.glass-card {
+  border-radius: $radius-xl;
+  transition: all $transition-smooth;
+  position: relative;
+  overflow: hidden;
+
+  // Variants
+  &--premium {
+    background: $color-bg-card;
+    backdrop-filter: blur($glass-blur);
+    -webkit-backdrop-filter: blur($glass-blur);
+    border: 1px solid $color-border;
+    box-shadow: $shadow-card;
+  }
+
+  &--glass {
+    background: $color-bg-glass;
+    backdrop-filter: blur($glass-blur-lg);
+    -webkit-backdrop-filter: blur($glass-blur-lg);
+    border: 1px solid $glass-border;
+    box-shadow: $shadow-glass;
+  }
+
+  &--gradient {
+    background: $gradient-card;
+    border: 1px solid $color-border;
+    box-shadow: $shadow-card;
+  }
+
+  &--elevated {
+    background: $color-bg-elevated;
+    border: 1px solid $color-border;
+    box-shadow: $shadow-md;
+  }
+
+  // Glow Styles
+  &--glow-primary {
+    box-shadow: $shadow-card, $border-glow-primary;
+
+    &:hover {
+      box-shadow: $shadow-card-hover, $shadow-glow-primary;
+    }
+  }
+
+  &--glow-secondary {
+    box-shadow: $shadow-card, $border-glow-secondary;
+
+    &:hover {
+      box-shadow: $shadow-card-hover, $shadow-glow-secondary;
+    }
+  }
+
+  &--glow-cyan {
+    box-shadow: $shadow-card, $border-glow-cyan;
+
+    &:hover {
+      box-shadow: $shadow-card-hover, $shadow-glow-cyan;
+    }
+  }
+
+  // Hover Effect
+  &--hover {
+    &:hover {
+      transform: translateY(-4px);
+      border-color: $color-border-hover;
+    }
+  }
+
+  // Children
+  &__content {
+    padding: $spacing-xl;
+  }
+}

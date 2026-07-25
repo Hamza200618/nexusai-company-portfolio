@@ -1,0 +1,393 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.demo-page {
+  // ── Hero ──
+  .demo-hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+
+    &__content {
+      max-width: 800px;
+    }
+
+    &__back {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+      font-family: $font-primary;
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+      margin-bottom: $spacing-lg;
+      transition: color $transition-base;
+      font-weight: $font-weight-medium;
+
+      &:hover { color: $color-neon-blue; }
+      svg { transition: transform $transition-base; }
+      &:hover svg { transform: translateX(-4px); }
+    }
+
+    &__meta {
+      display: flex;
+      align-items: center;
+      gap: $spacing-lg;
+      margin-bottom: $spacing-lg;
+    }
+
+    &__category {
+      font-family: $font-accent;
+      font-size: $font-size-xs;
+      color: $color-neon-blue;
+      text-transform: uppercase;
+      letter-spacing: $letter-spacing-widest;
+    }
+
+    &__status {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      color: var(--status-color);
+    }
+
+    &__status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: $radius-full;
+      background: var(--status-color);
+      box-shadow: 0 0 10px var(--status-color);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    &__title {
+      font-family: $font-display;
+      font-size: $font-size-5xl;
+      font-weight: $font-weight-extrabold;
+      margin-bottom: $spacing-lg;
+      line-height: $line-height-tight;
+
+      @include respond(md) { font-size: $font-size-6xl; }
+    }
+
+    &__description {
+      font-family: $font-primary;
+      font-size: $font-size-lg;
+      color: $color-text-secondary;
+      max-width: 650px;
+      line-height: $line-height-relaxed;
+      font-weight: $font-weight-light;
+      margin-bottom: $spacing-xl;
+    }
+
+    &__tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-sm;
+    }
+
+    &__tech-item {
+      display: inline-flex;
+      padding: $spacing-xs $spacing-md;
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      color: $color-neon-blue;
+      background: rgba($color-neon-blue, 0.08);
+      border: 1px solid rgba($color-neon-blue, 0.15);
+      border-radius: $radius-full;
+      font-weight: $font-weight-medium;
+    }
+  }
+
+  // ── Video ──
+  .demo-video {
+    &__player {
+      @include card-premium;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: $color-black;
+    }
+
+    &__video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    &__placeholder {
+      @include card-premium;
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-lg;
+      padding: $spacing-2xl;
+      text-align: center;
+    }
+
+    &__icon {
+      color: $color-neon-blue;
+      opacity: 0.6;
+    }
+
+    &__title {
+      font-family: $font-display;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+      color: $color-text-secondary;
+    }
+
+    &__hint {
+      font-family: $font-primary;
+      font-size: $font-size-sm;
+      color: $color-text-muted;
+    }
+
+    &__format {
+      display: flex;
+      gap: $spacing-md;
+
+      span {
+        padding: $spacing-xs $spacing-md;
+        font-family: $font-accent;
+        font-size: $font-size-2xs;
+        color: $color-text-dim;
+        background: rgba($color-neon-blue, 0.05);
+        border: 1px solid $color-border;
+        border-radius: $radius-xs;
+        text-transform: uppercase;
+        letter-spacing: $letter-spacing-wider;
+      }
+    }
+  }
+
+  // ── Overview ──
+  .demo-overview {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: $spacing-3xl;
+    align-items: start;
+
+    @include respond(md) { grid-template-columns: 1fr; }
+
+    &__main {
+      h2 {
+        font-family: $font-display;
+        font-size: $font-size-2xl;
+        color: $color-heading;
+        margin-bottom: $spacing-lg;
+        margin-top: $spacing-2xl;
+
+        &:first-child { margin-top: 0; }
+      }
+
+      p {
+        font-family: $font-primary;
+        font-size: $font-size-base;
+        color: $color-text-secondary;
+        line-height: $line-height-relaxed;
+        font-weight: $font-weight-light;
+      }
+    }
+
+    &__features {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        font-family: $font-primary;
+        font-size: $font-size-base;
+        color: $color-text-secondary;
+        font-weight: $font-weight-light;
+
+        svg { color: $color-neon-blue; flex-shrink: 0; }
+      }
+    }
+
+    &__sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xl;
+      position: sticky;
+      top: 100px;
+
+      @include respond(md) { position: static; }
+    }
+
+    &__card {
+      @include card-premium;
+      padding: $spacing-xl;
+
+      h3 {
+        font-family: $font-display;
+        font-size: $font-size-lg;
+        color: $color-heading;
+        margin-bottom: $spacing-lg;
+      }
+    }
+
+    &__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+    }
+
+    &__status-bar {
+      width: 100%;
+      height: 6px;
+      background: $color-bg-surface;
+      border-radius: $radius-full;
+      overflow: hidden;
+      margin-bottom: $spacing-sm;
+    }
+
+    &__status-fill {
+      height: 100%;
+      border-radius: $radius-full;
+      transition: width 1s ease;
+    }
+
+    &__status-text {
+      font-family: $font-accent;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      text-transform: uppercase;
+      letter-spacing: $letter-spacing-wider;
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+  }
+
+  // ── Challenges & Improvements ──
+  .demo-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-3xl;
+
+    @include respond(md) { grid-template-columns: 1fr; }
+
+    h2 {
+      font-family: $font-display;
+      font-size: $font-size-2xl;
+      color: $color-heading;
+      margin-bottom: $spacing-xl;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+
+    &__item {
+      display: flex;
+      align-items: flex-start;
+      gap: $spacing-md;
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      color: $color-text-secondary;
+      line-height: $line-height-relaxed;
+      font-weight: $font-weight-light;
+    }
+
+    &__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: $radius-md;
+      flex-shrink: 0;
+      margin-top: 2px;
+
+      &--challenge {
+        background: rgba(245, 158, 11, 0.1);
+        color: #f59e0b;
+      }
+
+      &--improvement {
+        background: rgba(52, 211, 153, 0.1);
+        color: #34d399;
+      }
+    }
+  }
+
+  // ── Architecture ──
+  .demo-architecture {
+    h2 {
+      font-family: $font-display;
+      font-size: $font-size-2xl;
+      color: $color-heading;
+      margin-bottom: $spacing-xl;
+    }
+
+    &__placeholder {
+      @include card-premium;
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-lg;
+      padding: $spacing-2xl;
+      text-align: center;
+
+      span {
+        font-family: $font-display;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $color-text-secondary;
+      }
+
+      p {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        color: $color-text-muted;
+      }
+    }
+
+    &__icon {
+      color: $color-electric-purple;
+      opacity: 0.6;
+    }
+  }
+
+  // ── Not Found ──
+  &__not-found {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 80px;
+
+    h1 {
+      font-family: $font-display;
+      font-size: $font-size-4xl;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: $color-text-secondary;
+      margin-bottom: $spacing-xl;
+    }
+  }
+}

@@ -1,0 +1,249 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.contact-section {
+  position: relative;
+  text-align: center;
+  overflow: hidden;
+
+  // ── Glow Orbs ──
+  .contact-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+
+    &--1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+      top: -20%;
+      right: -20%;
+
+      @include respond(md) {
+        width: 600px;
+        height: 600px;
+      }
+    }
+
+    &--2 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 70%);
+      bottom: -20%;
+      left: -20%;
+
+      @include respond(md) {
+        width: 500px;
+        height: 500px;
+      }
+    }
+  }
+
+  .contact-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  // ═══════════════════════════════════════
+  // EMAIL CTA
+  // ═══════════════════════════════════════
+
+  .contact-cta {
+    @include card-premium;
+    padding: $spacing-2xl;
+    margin: $spacing-2xl auto;
+    max-width: 500px;
+    text-align: center;
+
+    @include respond(md) {
+      padding: $spacing-3xl;
+    }
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: $radius-lg;
+      background: rgba($color-neon-blue, 0.1);
+      color: $color-neon-blue;
+      margin-bottom: $spacing-lg;
+      box-shadow: $glow-primary-sm;
+
+      svg {
+        width: 28px;
+        height: 28px;
+
+        @include respond(md) {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+
+    &__title {
+      font-family: $font-display;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-semibold;
+      color: $color-heading;
+      margin-bottom: $spacing-md;
+
+      @include respond(md) {
+        font-size: $font-size-3xl;
+      }
+    }
+
+    &__text {
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      color: $color-text-secondary;
+      line-height: $line-height-relaxed;
+      font-weight: $font-weight-light;
+      margin-bottom: $spacing-xl;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-sm;
+      padding: $spacing-md $spacing-xl;
+      font-family: $font-primary;
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      border-radius: $radius-md;
+      background: $gradient-primary;
+      color: $color-heading;
+      text-decoration: none;
+      box-shadow: $shadow-glow-primary;
+      transition: all $transition-base;
+      cursor: pointer;
+      letter-spacing: $letter-spacing-wide;
+      will-change: transform;
+
+      svg {
+        transition: transform $transition-base;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: $glow-primary-md, $shadow-md;
+
+        svg {
+          transform: translate(2px, -2px);
+        }
+      }
+    }
+  }
+
+  // ═══════════════════════════════════════
+  // SOCIAL ICONS
+  // ═══════════════════════════════════════
+
+  .contact-social {
+    margin-top: $spacing-3xl;
+
+    @include respond(md) {
+      margin-top: $spacing-4xl;
+    }
+
+    &__label {
+      font-family: $font-primary;
+      font-size: $font-size-sm;
+      color: $color-text-muted;
+      margin-bottom: $spacing-lg;
+      font-weight: $font-weight-light;
+    }
+
+    &__links {
+      display: flex;
+      justify-content: center;
+      gap: $spacing-lg;
+
+      @include respond(sm) {
+        gap: $spacing-xl;
+      }
+    }
+
+    &__link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: $spacing-sm;
+      text-decoration: none;
+      padding: $spacing-lg;
+      border-radius: $radius-lg;
+      background: $color-bg-card;
+      border: 1px solid $color-border;
+      box-shadow: $shadow-card;
+      transition: all $transition-smooth;
+      min-width: 120px;
+
+      @include respond(sm) {
+        min-width: 140px;
+        padding: $spacing-xl;
+      }
+
+      &:hover {
+        background: $color-bg-card-hover;
+        border-color: $color-border-hover;
+        transform: translateY(-6px);
+        box-shadow: $shadow-card-hover;
+      }
+    }
+
+    &__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: $radius-md;
+      background: rgba($color-neon-blue, 0.1);
+      color: $color-neon-blue;
+      transition: all $transition-base;
+
+      svg {
+        width: 24px;
+        height: 24px;
+        transition: all $transition-base;
+
+        @include respond(md) {
+          width: 28px;
+          height: 28px;
+        }
+      }
+
+      .contact-social__link:hover & {
+        background: $gradient-primary;
+        color: $color-heading;
+        box-shadow: $glow-primary-md;
+        transform: scale(1.1);
+
+        svg {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    &__name {
+      font-family: $font-primary;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      color: $color-text-secondary;
+      transition: color $transition-base;
+
+      .contact-social__link:hover & {
+        color: $color-heading;
+      }
+    }
+  }
+}

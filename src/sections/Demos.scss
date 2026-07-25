@@ -1,0 +1,95 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.demos-section {
+  &__tabs {
+    display: flex;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-xl;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @include respond(md) {
+      gap: $spacing-md;
+      margin-bottom: $spacing-2xl;
+    }
+  }
+
+  &__tab {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    background: $color-bg-card;
+    border: 1px solid $color-border;
+    border-radius: $radius-full;
+    cursor: pointer;
+    transition: all $transition-base;
+    letter-spacing: $letter-spacing-wide;
+
+    @include respond(md) {
+      padding: $spacing-sm $spacing-xl;
+      font-size: $font-size-sm;
+    }
+
+    &:hover {
+      color: $color-text;
+      border-color: $color-border-hover;
+      background: $color-bg-card-hover;
+    }
+
+    &--active {
+      color: $color-heading;
+      background: $gradient-primary;
+      border-color: transparent;
+      box-shadow: $glow-primary-md;
+
+      &:hover {
+        background: $gradient-primary;
+        box-shadow: $glow-primary-lg;
+      }
+    }
+  }
+
+  &__tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 $spacing-xs;
+    font-size: $font-size-2xs;
+    font-weight: $font-weight-bold;
+    border-radius: $radius-full;
+    background: rgba(255, 255, 255, 0.15);
+    color: inherit;
+
+    @include respond(md) {
+      min-width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+    min-height: 200px;
+
+    @include respond(sm) {
+      gap: $spacing-xl;
+    }
+
+    @include respond(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

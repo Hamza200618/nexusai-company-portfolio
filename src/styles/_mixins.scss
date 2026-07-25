@@ -1,0 +1,569 @@
+// ═══════════════════════════════════════
+// NEXUSAI — Premium Mixins
+// Glassmorphism • Glowing Borders • Cinematic
+// ═══════════════════════════════════════
+
+// ─── Breakpoints ───────────────────────
+@mixin respond($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: $breakpoint-xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == 2xl {
+    @media (min-width: $breakpoint-2xl) { @content; }
+  } @else if $breakpoint == 3xl {
+    @media (min-width: $breakpoint-3xl) { @content; }
+  }
+}
+
+// Max-width breakpoints (for mobile-first overrides)
+@mixin respond-max($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: 375px) { @content; }
+  } @else if $breakpoint == sm {
+    @media (max-width: 639px) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: 767px) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: 1023px) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: 1279px) { @content; }
+  }
+}
+
+// ─── Flex ──────────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// ─── Grid ──────────────────────────────
+@mixin grid($columns: 2, $gap: $grid-gap) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+// ─── Container ─────────────────────────
+@mixin container {
+  width: 100%;
+  max-width: $container-max;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+
+  @include respond(lg) {
+    padding: 0 $container-padding-lg;
+  }
+}
+
+@mixin container-narrow {
+  width: 100%;
+  max-width: $container-narrow;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+}
+
+@mixin container-wide {
+  width: 100%;
+  max-width: $container-wide;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+}
+
+// ═══════════════════════════════════════
+// GLASSMORPHISM SYSTEM
+// ═══════════════════════════════════════
+
+// Base Glass
+@mixin glass($opacity: 0.03, $blur: 20px) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+// Glass Card (elevated)
+@mixin glass-card {
+  background: $color-bg-card;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border: 1px solid $color-border;
+  box-shadow: $shadow-card;
+  transition: all $transition-base;
+
+  &:hover {
+    background: $color-bg-card-hover;
+    border-color: $color-border-hover;
+    box-shadow: $shadow-card-hover;
+    transform: translateY(-2px);
+  }
+}
+
+// Glass Panel (large surfaces)
+@mixin glass-panel {
+  background: $color-bg-glass;
+  backdrop-filter: blur($glass-blur-lg);
+  -webkit-backdrop-filter: blur($glass-blur-lg);
+  border: 1px solid $glass-border;
+  box-shadow: $shadow-glass;
+}
+
+// Glass Strong (more visible)
+@mixin glass-strong {
+  background: $color-bg-glass-strong;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border: 1px solid $glass-border;
+  box-shadow: $shadow-glass;
+}
+
+// ═══════════════════════════════════════
+// GLOWING BORDERS SYSTEM
+// ═══════════════════════════════════════
+
+// Glowing Border (primary - neon blue)
+@mixin glow-border-primary {
+  border: 1px solid $color-border;
+  box-shadow: $border-glow-primary;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: $color-border-hover;
+    box-shadow: $shadow-glow-primary, $border-glow-primary;
+  }
+}
+
+// Glowing Border (secondary - purple)
+@mixin glow-border-secondary {
+  border: 1px solid $color-border;
+  box-shadow: $border-glow-secondary;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: rgba($color-electric-purple, 0.2);
+    box-shadow: $shadow-glow-secondary, $border-glow-secondary;
+  }
+}
+
+// Glowing Border (cyan)
+@mixin glow-border-cyan {
+  border: 1px solid $color-border;
+  box-shadow: $border-glow-cyan;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: rgba($color-cyan, 0.2);
+    box-shadow: $shadow-glow-cyan, $border-glow-cyan;
+  }
+}
+
+// Active Glow Border (always glowing)
+@mixin glow-border-active($color: $color-neon-blue) {
+  border: 1px solid rgba($color, 0.2);
+  box-shadow: 0 0 1px rgba($color, 0.4), 0 0 4px rgba($color, 0.15), inset 0 0 1px rgba($color, 0.1);
+}
+
+// ═══════════════════════════════════════
+// GRADIENT LIGHTING SYSTEM
+// ═══════════════════════════════════════
+
+// Gradient Text
+@mixin gradient-text($gradient: $gradient-text) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Gradient Border (CSS only)
+@mixin gradient-border($gradient: $gradient-primary, $width: 1px) {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: $width;
+    background: $gradient;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+// Gradient Background
+@mixin gradient-bg($gradient: $gradient-primary) {
+  background: $gradient;
+}
+
+// Gradient Overlay
+@mixin gradient-overlay($gradient: $gradient-glow) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: $gradient;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}
+
+// ═══════════════════════════════════════
+// GLOW EFFECTS
+// ═══════════════════════════════════════
+
+// Box Glow
+@mixin glow($color: $color-neon-blue, $size: 20px) {
+  box-shadow: 0 0 $size rgba($color, 0.3);
+}
+
+// Hover Glow
+@mixin hover-glow($color: $color-neon-blue) {
+  transition: all $transition-base;
+
+  &:hover {
+    box-shadow: 0 0 30px rgba($color, 0.25), 0 0 60px rgba($color, 0.1);
+    border-color: rgba($color, 0.3);
+  }
+}
+
+// Pulse Glow Animation
+@mixin pulse-glow($color: $color-neon-blue) {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+// ═══════════════════════════════════════
+// CARD SYSTEM
+// ═══════════════════════════════════════
+
+// Premium Card
+@mixin card-premium {
+  background: $color-bg-card;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  transition: all $transition-smooth;
+
+  &:hover {
+    background: $color-bg-card-hover;
+    border-color: $color-border-hover;
+    box-shadow: $shadow-card-hover;
+    transform: translateY(-4px);
+  }
+}
+
+// Glass Card (alternative)
+@mixin card-glass {
+  @include glass-panel;
+  border-radius: $radius-xl;
+  transition: all $transition-smooth;
+
+  &:hover {
+    background: $color-bg-glass-hover;
+    border-color: $glass-border-hover;
+    transform: translateY(-2px);
+    box-shadow: $shadow-glass, $shadow-glow-primary;
+  }
+}
+
+// Gradient Card
+@mixin card-gradient {
+  background: $gradient-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  transition: all $transition-smooth;
+
+  &:hover {
+    border-color: $color-border-hover;
+    box-shadow: $shadow-card-hover;
+    transform: translateY(-4px);
+  }
+}
+
+// ═══════════════════════════════════════
+// BUTTON SYSTEM
+// ═══════════════════════════════════════
+
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-xl;
+  font-family: $font-primary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  border-radius: $radius-md;
+  transition: all $transition-base;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  letter-spacing: $letter-spacing-wide;
+  position: relative;
+  overflow: hidden;
+}
+
+@mixin btn-primary {
+  @include btn-base;
+  background: $gradient-primary;
+  color: $color-heading;
+  border-color: transparent;
+  box-shadow: $shadow-glow-primary;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $glow-primary-md, $shadow-md;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin btn-secondary {
+  @include btn-base;
+  background: transparent;
+  color: $color-neon-blue;
+  border-color: rgba($color-neon-blue, 0.3);
+  box-shadow: $border-glow-primary;
+
+  &:hover {
+    background: rgba($color-neon-blue, 0.08);
+    border-color: $color-neon-blue;
+    box-shadow: $shadow-glow-primary, $border-glow-primary;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin btn-glass {
+  @include btn-base;
+  background: $color-bg-glass;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid $glass-border;
+  color: $color-text;
+  box-shadow: $shadow-glass;
+
+  &:hover {
+    background: $color-bg-glass-hover;
+    border-color: $glass-border-hover;
+    box-shadow: $shadow-glass, $shadow-glow-primary;
+    transform: translateY(-2px);
+  }
+}
+
+@mixin btn-ghost {
+  @include btn-base;
+  background: transparent;
+  color: $color-text-secondary;
+  border-color: transparent;
+
+  &:hover {
+    color: $color-neon-blue;
+    background: rgba($color-neon-blue, 0.05);
+  }
+}
+
+// ═══════════════════════════════════════
+// SECTION TITLES
+// ═══════════════════════════════════════
+
+@mixin section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-accent;
+  font-size: $font-size-2xs;
+  font-weight: $font-weight-medium;
+  color: $color-neon-blue;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-widest;
+  margin-bottom: $spacing-md;
+
+  &::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: $color-neon-blue;
+    box-shadow: $glow-primary-sm;
+  }
+
+  &::after {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: $color-neon-blue;
+    box-shadow: $glow-primary-sm;
+  }
+}
+
+@mixin section-title {
+  font-family: $font-display;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $color-heading;
+  margin-bottom: $spacing-lg;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-tight;
+
+  @include respond(md) {
+    font-size: $font-size-4xl;
+  }
+
+  @include respond(lg) {
+    font-size: $font-size-5xl;
+  }
+}
+
+@mixin section-description {
+  font-family: $font-primary;
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+  max-width: 600px;
+  line-height: $line-height-relaxed;
+  font-weight: $font-weight-light;
+}
+
+// ═══════════════════════════════════════
+// SECTION PADDING
+// ═══════════════════════════════════════
+
+@mixin section-padding {
+  padding: $spacing-4xl 0;
+
+  @include respond(md) {
+    padding: $spacing-5xl 0;
+  }
+
+  @include respond(lg) {
+    padding: $spacing-6xl 0;
+  }
+}
+
+// ═══════════════════════════════════════
+// UTILITY MIXINS
+// ═══════════════════════════════════════
+
+// Aspect Ratio
+@mixin aspect-ratio($ratio: 16/9) {
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-bottom: calc(100% / ($ratio));
+  }
+}
+
+// Truncate Text
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// Hide Scrollbar
+@mixin hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Skeleton Loading
+@mixin skeleton {
+  background: linear-gradient(
+    90deg,
+    $color-bg-surface 25%,
+    rgba($color-bg-surface, 0.5) 50%,
+    $color-bg-surface 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+// Fluid Text (clamp)
+@mixin fluid-text($min-size, $max-size) {
+  font-size: clamp(#{$min-size}, #{$min-size} + 1vw, #{$max-size});
+}
+
+// No Select
+@mixin no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+// Screen Reader Only
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Floating Animation
+@mixin float($duration: 3s) {
+  animation: float $duration ease-in-out infinite;
+}
+
+// Gradient Text (shorthand)
+@mixin text-gradient($gradient: $gradient-text) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

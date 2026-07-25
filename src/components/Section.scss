@@ -1,0 +1,41 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.section-wrapper {
+  @include section-padding;
+  position: relative;
+
+  &--default {
+    background: transparent;
+  }
+
+  &--alt {
+    background: $color-bg-alt;
+  }
+
+  &--dark {
+    background: $color-bg;
+  }
+
+  &--navy {
+    background: $color-navy;
+  }
+
+  &--gradient {
+    background: linear-gradient(180deg, $color-bg 0%, $color-bg-alt 50%, $color-bg 100%);
+  }
+
+  &--premium {
+    background: linear-gradient(180deg, $color-bg 0%, $color-navy 50%, $color-bg 100%);
+  }
+
+  &--full {
+    padding-left: 0;
+    padding-right: 0;
+
+    .container {
+      max-width: 100%;
+      padding: 0;
+    }
+  }
+}

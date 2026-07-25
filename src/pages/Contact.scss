@@ -1,0 +1,186 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.contact-page {
+  .contact-header {
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    padding: 80px $spacing-md 0;
+
+    @include respond(md) {
+      min-height: 50vh;
+      padding: 80px 0 0;
+    }
+
+    &__content {
+      max-width: 700px;
+    }
+  }
+
+  .contact-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
+    align-items: start;
+
+    @include respond(md) {
+      grid-template-columns: 1fr 1.5fr;
+      gap: $spacing-3xl;
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+
+      @include respond(md) {
+        gap: $spacing-xl;
+      }
+    }
+
+    &__info-item {
+      display: flex;
+      gap: $spacing-md;
+      align-items: flex-start;
+
+      svg {
+        color: $color-neon-blue;
+        flex-shrink: 0;
+        margin-top: 2px;
+        width: 18px;
+        height: 18px;
+
+        @include respond(md) {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      h4 {
+        font-family: $font-display;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        margin-bottom: $spacing-xs;
+        color: $color-heading;
+      }
+
+      a, p {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        transition: color $transition-base;
+        font-weight: $font-weight-light;
+      }
+
+      a:hover { color: $color-neon-blue; }
+    }
+
+    &__social {
+      padding-top: $spacing-lg;
+      border-top: 1px solid $color-border;
+
+      h4 {
+        font-family: $font-display;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-semibold;
+        margin-bottom: $spacing-md;
+        color: $color-heading;
+      }
+    }
+
+    &__social-links {
+      display: flex;
+      gap: $spacing-sm;
+    }
+
+    &__social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: $radius-md;
+      border: 1px solid $color-border;
+      box-shadow: $border-glow-primary;
+      color: $color-text-secondary;
+      transition: all $transition-base;
+
+      @include respond(md) {
+        width: 40px;
+        height: 40px;
+      }
+
+      &:hover {
+        color: $color-neon-blue;
+        border-color: rgba($color-neon-blue, 0.3);
+        background: rgba($color-neon-blue, 0.08);
+        box-shadow: $shadow-glow-primary, $border-glow-primary;
+      }
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-lg;
+    }
+
+    &__row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+
+      @include respond(sm) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    &__field {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-sm;
+
+      label {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $color-text;
+      }
+
+      input,
+      textarea {
+        padding: $spacing-md;
+        background: $color-bg-card;
+        border: 1px solid $color-border;
+        border-radius: $radius-md;
+        color: $color-text;
+        font-size: $font-size-sm;
+        transition: all $transition-base;
+        font-family: $font-primary;
+
+        &::placeholder {
+          color: $color-text-muted;
+        }
+
+        &:focus {
+          outline: none;
+          border-color: $color-neon-blue;
+          box-shadow: 0 0 0 3px rgba($color-neon-blue, 0.1), $glow-primary-sm;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+    }
+
+    .btn {
+      width: 100%;
+
+      @include respond(sm) {
+        width: auto;
+      }
+    }
+  }
+}

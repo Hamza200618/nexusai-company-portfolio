@@ -1,0 +1,208 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.portfolio-card {
+  @include card-premium;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  break-inside: avoid;
+
+  // ── Image / Placeholder ──
+  &__image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+    background: $color-bg-surface;
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  &__placeholder-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--domain-color), 0.08) 0%,
+      rgba(139, 92, 246, 0.05) 100%
+    );
+    transition: all $transition-smooth;
+
+    .portfolio-card:hover & {
+      transform: scale(1.1);
+    }
+  }
+
+  &__placeholder-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__domain {
+    font-family: $font-accent;
+    font-size: $font-size-2xs;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-widest;
+    opacity: 0.6;
+  }
+
+  &__initial {
+    font-family: $font-display;
+    font-size: $font-size-6xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-dim;
+    opacity: 0.3;
+    transition: all $transition-smooth;
+
+    .portfolio-card:hover & {
+      opacity: 0.5;
+      transform: scale(1.1);
+    }
+  }
+
+  // ── Hover Overlay ──
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba($color-bg, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all $transition-smooth;
+
+    .portfolio-card:hover & {
+      opacity: 1;
+    }
+  }
+
+  &__overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+    transform: translateY(10px);
+    transition: transform $transition-smooth;
+
+    .portfolio-card:hover & {
+      transform: translateY(0);
+    }
+  }
+
+  &__overlay-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: $radius-full;
+    background: $gradient-primary;
+    color: $color-heading;
+    box-shadow: $glow-primary-md;
+    transition: transform $transition-base;
+
+    .portfolio-card:hover & {
+      transform: scale(1.1);
+    }
+  }
+
+  &__overlay-text {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-heading;
+    letter-spacing: $letter-spacing-wide;
+  }
+
+  // ── Content ──
+  &__content {
+    padding: $spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    flex: 1;
+  }
+
+  &__category {
+    .tag {
+      font-size: $font-size-2xs;
+    }
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-heading;
+    line-height: $line-height-tight;
+  }
+
+  &__description {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+    font-weight: $font-weight-light;
+    @include truncate(3);
+  }
+
+  // ── Tech Stack ──
+  &__tech {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding-top: $spacing-sm;
+    border-top: 1px solid $color-border;
+    margin-top: auto;
+  }
+
+  &__tech-label {
+    font-family: $font-accent;
+    font-size: $font-size-2xs;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wider;
+  }
+
+  &__tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+  }
+
+  &__tech-item {
+    display: inline-flex;
+    padding: $spacing-2xs $spacing-sm;
+    font-family: $font-primary;
+    font-size: $font-size-2xs;
+    color: $color-text-secondary;
+    background: rgba($color-neon-blue, 0.06);
+    border: 1px solid rgba($color-neon-blue, 0.1);
+    border-radius: $radius-xs;
+    font-weight: $font-weight-medium;
+  }
+
+  // ── Actions ──
+  &__actions {
+    padding-top: $spacing-sm;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

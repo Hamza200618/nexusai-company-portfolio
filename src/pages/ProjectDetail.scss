@@ -1,0 +1,173 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.project-detail {
+  .project-hero {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+
+    &__content {
+      max-width: 700px;
+    }
+
+    &__back {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+      font-family: $font-primary;
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+      margin-bottom: $spacing-lg;
+      transition: color $transition-base;
+      font-weight: $font-weight-medium;
+
+      &:hover {
+        color: $color-neon-blue;
+      }
+
+      svg {
+        transition: transform $transition-base;
+      }
+
+      &:hover svg {
+        transform: translateX(-4px);
+      }
+    }
+  }
+
+  .project-video {
+    &__placeholder {
+      @include card-premium;
+      aspect-ratio: 16/9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: $spacing-lg;
+      color: $color-text-muted;
+      padding: $spacing-xl;
+
+      svg { opacity: 0.5; }
+
+      span {
+        font-family: $font-display;
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $color-text-secondary;
+      }
+    }
+
+    &__hint {
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      color: $color-text-dim;
+    }
+  }
+
+  .project-info {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: $spacing-3xl;
+    align-items: start;
+
+    @include respond(md) { grid-template-columns: 1fr; }
+
+    &__main {
+      h2 {
+        font-family: $font-display;
+        font-size: $font-size-2xl;
+        color: $color-heading;
+        margin-bottom: $spacing-lg;
+        margin-top: $spacing-2xl;
+
+        &:first-child { margin-top: 0; }
+      }
+
+      p {
+        font-family: $font-primary;
+        font-size: $font-size-base;
+        color: $color-text-secondary;
+        line-height: $line-height-relaxed;
+        font-weight: $font-weight-light;
+      }
+    }
+
+    &__features {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        font-family: $font-primary;
+        font-size: $font-size-base;
+        color: $color-text-secondary;
+        font-weight: $font-weight-light;
+
+        svg {
+          color: $color-neon-blue;
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    &__sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xl;
+      position: sticky;
+      top: 100px;
+
+      @include respond(md) { position: static; }
+    }
+
+    &__card {
+      @include card-premium;
+      padding: $spacing-xl;
+
+      h3 {
+        font-family: $font-display;
+        font-size: $font-size-lg;
+        color: $color-heading;
+        margin-bottom: $spacing-lg;
+      }
+    }
+
+    &__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacing-xs;
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+  }
+
+  &__not-found {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 80px;
+
+    h1 {
+      font-family: $font-display;
+      font-size: $font-size-4xl;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: $color-text-secondary;
+      margin-bottom: $spacing-xl;
+    }
+  }
+}

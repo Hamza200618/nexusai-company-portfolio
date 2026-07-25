@@ -1,0 +1,372 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+// ═══════════════════════════════════════
+// HERO SECTION — Premium Cinematic
+// ═══════════════════════════════════════
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 80px $spacing-md 0;
+  background: $color-bg;
+
+  @include respond(md) {
+    padding: 80px 0 0;
+  }
+
+  // ── Ambient Glow Orbs ──
+  &__ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+
+    @include respond(md) {
+      filter: blur(100px);
+    }
+
+    &--1 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.12) 0%, transparent 70%);
+      top: -10%;
+      right: -20%;
+
+      @include respond(md) {
+        width: 600px;
+        height: 600px;
+        top: -20%;
+        right: -10%;
+      }
+    }
+
+    &--2 {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+      bottom: -10%;
+      left: -20%;
+
+      @include respond(md) {
+        width: 500px;
+        height: 500px;
+        bottom: -15%;
+        left: -10%;
+      }
+    }
+
+    &--3 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%);
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      @include respond(md) {
+        width: 400px;
+        height: 400px;
+      }
+    }
+  }
+
+  // ── Content ──
+  &__content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  // ── Section Label ──
+  .section-label {
+    @include section-label;
+    justify-content: center;
+    margin-bottom: $spacing-lg;
+    font-size: $font-size-2xs;
+
+    @include respond(md) {
+      font-size: $font-size-xs;
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  // ── Title ──
+  &__title {
+    position: relative;
+    font-family: $font-display;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-extrabold;
+    line-height: $line-height-tight;
+    letter-spacing: $letter-spacing-tight;
+    margin-bottom: $spacing-lg;
+    color: $color-heading;
+
+    @include respond(sm) {
+      font-size: $font-size-4xl;
+    }
+
+    @include respond(md) {
+      font-size: $font-size-5xl;
+    }
+
+    @include respond(lg) {
+      font-size: $font-size-6xl;
+    }
+
+    @include respond(xl) {
+      font-size: $font-size-7xl;
+    }
+
+    // Glow behind title
+    &-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 120%;
+      background: radial-gradient(ellipse, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    // Individual words
+    &-word {
+      display: inline-block;
+      opacity: 0; // GSAP will reveal
+
+      &--gradient {
+        @include gradient-text;
+      }
+    }
+  }
+
+  // ── Description ──
+  &__description {
+    font-family: $font-primary;
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    max-width: 650px;
+    margin: 0 auto $spacing-xl;
+    line-height: $line-height-relaxed;
+    font-weight: $font-weight-light;
+    opacity: 0; // GSAP will reveal
+    padding: 0 $spacing-md;
+
+    @include respond(sm) {
+      font-size: $font-size-lg;
+    }
+
+    @include respond(md) {
+      padding: 0;
+      margin-bottom: $spacing-2xl;
+    }
+  }
+
+  // ── Actions ──
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    justify-content: center;
+    align-items: center;
+    padding: 0 $spacing-md;
+
+    @include respond(sm) {
+      flex-direction: row;
+    }
+
+    @include respond(md) {
+      padding: 0;
+    }
+  }
+
+  // ── Magnetic Buttons ──
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-sm;
+    padding: $spacing-md $spacing-xl;
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    border-radius: $radius-md;
+    transition: all $transition-base;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    letter-spacing: $letter-spacing-wide;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    will-change: transform;
+    width: 100%;
+
+    @include respond(sm) {
+      width: auto;
+      padding: $spacing-md $spacing-2xl;
+    }
+
+    &--primary {
+      background: $gradient-primary;
+      color: $color-heading;
+      box-shadow: $shadow-glow-primary;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+        opacity: 0;
+        transition: opacity $transition-base;
+      }
+
+      &:hover {
+        box-shadow: $glow-primary-md, $shadow-md;
+
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+
+    &--secondary {
+      background: transparent;
+      color: $color-neon-blue;
+      border-color: rgba($color-neon-blue, 0.3);
+      box-shadow: $border-glow-primary;
+
+      &:hover {
+        background: rgba($color-neon-blue, 0.08);
+        border-color: $color-neon-blue;
+        box-shadow: $shadow-glow-primary, $border-glow-primary;
+      }
+    }
+
+    &-icon {
+      display: inline-flex;
+      align-items: center;
+      transition: transform $transition-base;
+
+      .hero__btn:hover & {
+        transform: translateX(3px);
+      }
+    }
+
+    &-text {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  // ── Scroll Indicator ──
+  &__scroll-indicator {
+    position: absolute;
+    bottom: $spacing-lg;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-sm;
+    z-index: 2;
+    animation: float 3s ease-in-out infinite;
+
+    @include respond(md) {
+      bottom: $spacing-2xl;
+    }
+  }
+
+  &__scroll-text {
+    font-family: $font-accent;
+    font-size: $font-size-2xs;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-widest;
+  }
+
+  &__scroll-line {
+    width: 1px;
+    height: 30px;
+    background: linear-gradient(180deg, $color-neon-blue, transparent);
+    box-shadow: $glow-primary-sm;
+
+    @include respond(md) {
+      height: 40px;
+    }
+  }
+}
+
+// ═══════════════════════════════════════
+// STATS SECTION
+// ═══════════════════════════════════════
+
+.stats {
+  text-align: center;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+    margin-top: $spacing-2xl;
+
+    @include respond(sm) {
+      gap: $spacing-lg;
+    }
+
+    @include respond(md) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-xl;
+      margin-top: $spacing-3xl;
+    }
+  }
+
+  &__item {
+    @include card-premium;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-lg $spacing-md;
+    text-align: center;
+
+    @include respond(md) {
+      padding: $spacing-xl;
+      gap: $spacing-sm;
+    }
+  }
+
+  &__number {
+    font-family: $font-display;
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    @include gradient-text;
+
+    @include respond(md) {
+      font-size: $font-size-4xl;
+    }
+  }
+
+  &__label {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    font-weight: $font-weight-light;
+
+    @include respond(md) {
+      font-size: $font-size-sm;
+    }
+  }
+}

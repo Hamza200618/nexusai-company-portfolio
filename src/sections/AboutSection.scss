@@ -1,0 +1,358 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.about-section {
+  // ═══════════════════════════════════════
+  // INTRO CONTENT
+  // ═══════════════════════════════════════
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-3xl;
+    align-items: center;
+    margin-bottom: $spacing-4xl;
+
+    @include respond(md) {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-4xl;
+      margin-bottom: $spacing-5xl;
+    }
+
+    &__text {
+      p {
+        font-family: $font-primary;
+        font-size: $font-size-base;
+        color: $color-text-secondary;
+        line-height: $line-height-relaxed;
+        margin-bottom: $spacing-lg;
+        font-weight: $font-weight-light;
+      }
+
+      .btn {
+        margin-top: $spacing-md;
+        width: 100%;
+
+        @include respond(sm) {
+          width: auto;
+        }
+      }
+    }
+
+    // ── Visual / Graphic ──
+    &__visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__graphic {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include respond(md) {
+        width: 350px;
+        height: 350px;
+      }
+    }
+
+    &__orb {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+      animation: pulse-glow 3s ease-in-out infinite;
+
+      @include respond(md) {
+        width: 250px;
+        height: 250px;
+      }
+    }
+
+    &__grid {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+      border-radius: 50%;
+      animation: spin-slow 20s linear infinite;
+    }
+
+    &__center-icon {
+      position: relative;
+      z-index: 2;
+      color: $color-neon-blue;
+      opacity: 0.6;
+    }
+  }
+
+  // Floating elements
+  .about-float {
+    position: absolute;
+    z-index: 3;
+    color: $color-electric-purple;
+    opacity: 0.3;
+
+    &--1 {
+      top: 10%;
+      right: 5%;
+    }
+
+    &--2 {
+      bottom: 15%;
+      left: 5%;
+      color: $color-cyan;
+    }
+  }
+
+  // ═══════════════════════════════════════
+  // PILLARS (Mission, Vision, Innovation)
+  // ═══════════════════════════════════════
+
+  .about-pillars {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-4xl;
+
+    @include respond(sm) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include respond(md) {
+      margin-bottom: $spacing-5xl;
+    }
+  }
+
+  .about-pillar {
+    @include card-premium;
+    padding: $spacing-xl;
+    text-align: center;
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: $radius-md;
+      background: rgba($color-neon-blue, 0.1);
+      color: $color-neon-blue;
+      margin-bottom: $spacing-md;
+      box-shadow: $glow-primary-sm;
+    }
+
+    h3 {
+      font-family: $font-display;
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-sm;
+      color: $color-heading;
+    }
+
+    p {
+      font-family: $font-primary;
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+      line-height: $line-height-relaxed;
+      font-weight: $font-weight-light;
+    }
+  }
+
+  // ═══════════════════════════════════════
+  // COUNTERS
+  // ═══════════════════════════════════════
+
+  .about-counters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-md;
+    margin-bottom: $spacing-4xl;
+
+    @include respond(sm) {
+      gap: $spacing-lg;
+    }
+
+    @include respond(md) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: $spacing-xl;
+      margin-bottom: $spacing-5xl;
+    }
+  }
+
+  .about-counter {
+    @include card-premium;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-lg $spacing-md;
+    text-align: center;
+
+    @include respond(md) {
+      padding: $spacing-xl;
+      gap: $spacing-sm;
+    }
+
+    &__number {
+      font-family: $font-display;
+      font-size: $font-size-3xl;
+      font-weight: $font-weight-bold;
+      @include gradient-text;
+
+      @include respond(md) {
+        font-size: $font-size-4xl;
+      }
+    }
+
+    &__label {
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      color: $color-text-secondary;
+      font-weight: $font-weight-light;
+
+      @include respond(md) {
+        font-size: $font-size-sm;
+      }
+    }
+  }
+
+  // ═══════════════════════════════════════
+  // TIMELINE
+  // ═══════════════════════════════════════
+
+  .about-timeline {
+    &__track {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xl;
+      padding-left: $spacing-2xl;
+
+      @include respond(md) {
+        flex-direction: row;
+        gap: $spacing-2xl;
+        padding-left: 0;
+      }
+    }
+
+    &__line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, $color-neon-blue, $color-electric-purple, $color-cyan);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+
+      @include respond(md) {
+        top: 50%;
+        left: 0;
+        right: 0;
+        width: auto;
+        height: 2px;
+        background: linear-gradient(90deg, $color-neon-blue, $color-electric-purple, $color-cyan);
+        top: 50%;
+      }
+    }
+
+    &__item {
+      position: relative;
+      flex: 1;
+
+      @include respond(md) {
+        padding-top: $spacing-3xl;
+      }
+    }
+
+    &__marker {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+
+      @include respond(md) {
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 0;
+      }
+    }
+
+    &__dot {
+      width: 18px;
+      height: 18px;
+      border-radius: $radius-full;
+      background: $gradient-primary;
+      box-shadow: $glow-primary-sm;
+      flex-shrink: 0;
+
+      @include respond(md) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &__year {
+      font-family: $font-accent;
+      font-size: $font-size-sm;
+      color: $color-neon-blue;
+      font-weight: $font-weight-semibold;
+      letter-spacing: $letter-spacing-wider;
+
+      @include respond(md) {
+        font-size: $font-size-base;
+      }
+    }
+
+    &__card {
+      @include card-premium;
+      padding: $spacing-lg;
+
+      @include respond(md) {
+        padding: $spacing-xl;
+      }
+    }
+
+    &__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: $radius-md;
+      background: rgba($color-neon-blue, 0.1);
+      color: $color-neon-blue;
+      margin-bottom: $spacing-md;
+    }
+
+    h4 {
+      font-family: $font-display;
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: $color-heading;
+      margin-bottom: $spacing-xs;
+
+      @include respond(md) {
+        font-size: $font-size-lg;
+      }
+    }
+
+    p {
+      font-family: $font-primary;
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+      line-height: $line-height-relaxed;
+      font-weight: $font-weight-light;
+    }
+  }
+}

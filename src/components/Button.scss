@@ -1,0 +1,54 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.btn {
+  @include btn-base;
+
+  &--primary {
+    @include btn-primary;
+  }
+
+  &--secondary {
+    @include btn-secondary;
+  }
+
+  &--glass {
+    @include btn-glass;
+  }
+
+  &--ghost {
+    @include btn-ghost;
+  }
+
+  &--sm {
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-xs;
+  }
+
+  &--lg {
+    padding: $spacing-lg $spacing-2xl;
+    font-size: $font-size-base;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  &__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+
+    &--left { margin-right: $spacing-xs; }
+    &--right { margin-left: $spacing-xs; }
+  }
+
+  &__text {
+    position: relative;
+    z-index: 1;
+  }
+}

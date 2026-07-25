@@ -1,0 +1,197 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.service-card {
+  @include card-premium;
+  position: relative;
+  overflow: hidden;
+  padding: $spacing-2xl;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  cursor: default;
+
+  // ── Mouse-follow glow ──
+  &__mouse-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: translate(calc(var(--mouse-x, 0) - 150px), calc(var(--mouse-y, 0) - 150px));
+    z-index: 1;
+    mix-blend-mode: screen;
+  }
+
+  // ── Floating animation ──
+  &__float {
+    position: relative;
+    z-index: 2;
+    animation: float-service 4s ease-in-out infinite;
+    animation-delay: inherit;
+  }
+
+  // ── Corner glow accents ──
+  &__corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity $transition-smooth;
+
+    &--tl {
+      top: -1px;
+      left: -1px;
+      border-top: 2px solid $color-neon-blue;
+      border-left: 2px solid $color-neon-blue;
+      border-radius: $radius-xl 0 0 0;
+      box-shadow: $glow-primary-sm;
+    }
+
+    &--tr {
+      top: -1px;
+      right: -1px;
+      border-top: 2px solid $color-electric-purple;
+      border-right: 2px solid $color-electric-purple;
+      border-radius: 0 $radius-xl 0 0;
+      box-shadow: $glow-secondary-sm;
+    }
+
+    &--bl {
+      bottom: -1px;
+      left: -1px;
+      border-bottom: 2px solid $color-electric-purple;
+      border-left: 2px solid $color-electric-purple;
+      border-radius: 0 0 0 $radius-xl;
+      box-shadow: $glow-secondary-sm;
+    }
+
+    &--br {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 2px solid $color-neon-blue;
+      border-right: 2px solid $color-neon-blue;
+      border-radius: 0 0 $radius-xl 0;
+      box-shadow: $glow-primary-sm;
+    }
+  }
+
+  &:hover &__corner {
+    opacity: 1;
+  }
+
+  // ── Icon ──
+  &__icon-wrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin-bottom: $spacing-lg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon-bg {
+    position: absolute;
+    inset: 0;
+    border-radius: $radius-lg;
+    background: $gradient-glow;
+    opacity: 0.3;
+    transition: all $transition-smooth;
+
+    .service-card:hover & {
+      opacity: 0.5;
+      transform: scale(1.1);
+      box-shadow: $glow-primary-md;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    z-index: 1;
+    color: $color-neon-blue;
+    transition: all $transition-smooth;
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .service-card:hover & {
+      color: $color-heading;
+      transform: scale(1.1);
+    }
+  }
+
+  // ── Title ──
+  &__title {
+    font-family: $font-display;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-heading;
+    margin-bottom: $spacing-md;
+    transition: color $transition-base;
+
+    .service-card:hover & {
+      @include gradient-text;
+    }
+  }
+
+  // ── Description ──
+  &__description {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+    font-weight: $font-weight-light;
+    margin-bottom: $spacing-lg;
+  }
+
+  // ── Features ──
+  &__features {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $color-border;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      font-family: $font-primary;
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+      transition: color $transition-base;
+
+      svg {
+        color: $color-neon-blue;
+        flex-shrink: 0;
+        opacity: 0.6;
+        transition: opacity $transition-base;
+      }
+
+      .service-card:hover & {
+        color: $color-text-secondary;
+
+        svg {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+// ── Floating keyframe ──
+@keyframes float-service {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}

@@ -1,0 +1,221 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.footer {
+  background: $color-bg-alt;
+  border-top: 1px solid $color-border;
+  padding: $spacing-3xl 0 $spacing-lg;
+  margin-top: $spacing-4xl;
+  position: relative;
+
+  @include respond(md) {
+    padding: $spacing-4xl 0 $spacing-xl;
+    margin-top: $spacing-5xl;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: $gradient-glow;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+    padding-bottom: $spacing-2xl;
+    border-bottom: 1px solid $color-border;
+
+    @include respond(sm) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include respond(md) {
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: $spacing-2xl;
+      padding-bottom: $spacing-3xl;
+    }
+  }
+
+  &__brand {
+    @include respond(sm) {
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+
+    @include respond(md) {
+      grid-column: auto;
+      text-align: left;
+    }
+  }
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+
+    @include respond(md) {
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: $gradient-primary;
+    border-radius: $radius-sm;
+    font-family: $font-display;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $color-heading;
+    box-shadow: $glow-primary-sm;
+
+    @include respond(md) {
+      width: 32px;
+      height: 32px;
+      font-size: $font-size-base;
+    }
+  }
+
+  &__logo-text {
+    font-family: $font-display;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    @include gradient-text;
+
+    @include respond(md) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &__description {
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+    max-width: 100%;
+    font-weight: $font-weight-light;
+    margin: 0 auto;
+
+    @include respond(md) {
+      max-width: 320px;
+      margin: 0;
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: $spacing-md;
+    margin-top: $spacing-lg;
+    justify-content: center;
+
+    @include respond(md) {
+      justify-content: flex-start;
+    }
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-md;
+    border: 1px solid $color-border;
+    box-shadow: $border-glow-primary;
+    color: $color-text-secondary;
+    transition: all $transition-base;
+
+    @include respond(md) {
+      width: 40px;
+      height: 40px;
+    }
+
+    &:hover {
+      color: $color-neon-blue;
+      border-color: rgba($color-neon-blue, 0.3);
+      background: rgba($color-neon-blue, 0.08);
+      box-shadow: $shadow-glow-primary, $border-glow-primary;
+      transform: translateY(-3px);
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+
+      @include respond(md) {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+
+  &__heading {
+    font-family: $font-accent;
+    font-size: $font-size-2xs;
+    font-weight: $font-weight-semibold;
+    color: $color-neon-blue;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-widest;
+    margin-bottom: $spacing-md;
+
+    @include respond(md) {
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__link {
+    display: inline-block;
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    padding: $spacing-2xs 0;
+    transition: color $transition-base;
+    cursor: pointer;
+    font-weight: $font-weight-light;
+
+    &:hover {
+      color: $color-neon-blue;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+    padding-top: $spacing-lg;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: $color-text-muted;
+    text-align: center;
+
+    @include respond(md) {
+      flex-direction: row;
+      justify-content: space-between;
+      padding-top: $spacing-xl;
+    }
+  }
+
+  &__bottom-links {
+    display: flex;
+    gap: $spacing-lg;
+  }
+
+  &__bottom-link {
+    color: $color-text-muted;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $color-neon-blue;
+    }
+  }
+}

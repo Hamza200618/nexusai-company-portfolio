@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Section from '../components/Section';
 import SectionTitle from '../components/SectionTitle';
-import Button from '../components/Button';
+import MagneticButton from '../components/MagneticButton';
 import { aboutSteps } from '../data/aboutData.jsx';
 import './AboutSection.scss';
 
@@ -145,7 +145,9 @@ const AboutSection = () => {
               and software engineering to create solutions that are not just intelligent but also
               reliable, scalable, and user-friendly.
             </p>
-            <Button variant="primary" to="/contact">Join Our Mission</Button>
+            <MagneticButton to="#contact-section" className="hero__btn hero__btn--primary" style={{ padding: '12px 28px', fontSize: '14px', fontWeight: 600, borderRadius: '8px', display: 'inline-flex', alignItems: 'center', gap: '8px', fontFamily: "'Poppins', sans-serif", letterSpacing: '0.05em', textDecoration: 'none', background: 'linear-gradient(135deg, #00f0ff, #7b2ff7)', color: '#fff', boxShadow: '0 0 20px rgba(0, 240, 255, 0.15)' }}>
+              <span style={{ position: 'relative', zIndex: 1 }}>Join Our Mission</span>
+            </MagneticButton>
           </div>
 
           <div className="about-content__visual">

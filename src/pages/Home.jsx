@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Section from '../components/Section';
-import MagneticButton from '../components/MagneticButton';
 import SectionTitle from '../components/SectionTitle';
+import MagneticButton from '../components/MagneticButton';
 import AboutSection from '../sections/AboutSection';
 import Services from '../sections/Services';
 import Portfolio from '../sections/Portfolio';
@@ -123,7 +123,7 @@ const Home = () => {
             </p>
 
             <div className="hero__actions" ref={buttonsRef}>
-              <MagneticButton to="/projects" className="hero__btn hero__btn--primary">
+              <MagneticButton to="#demos" className="hero__btn hero__btn--primary">
                 <span className="hero__btn-text">Explore Our Work</span>
                 <span className="hero__btn-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -133,7 +133,7 @@ const Home = () => {
                 </span>
               </MagneticButton>
 
-              <MagneticButton to="/contact" className="hero__btn hero__btn--secondary">
+              <MagneticButton to="#contact-section" className="hero__btn hero__btn--secondary">
                 <span className="hero__btn-text">Contact Us</span>
                 <span className="hero__btn-icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

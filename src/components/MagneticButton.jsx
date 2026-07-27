@@ -8,11 +8,13 @@ const MagneticButton = ({ children, to, href, onClick, className = '', ...props 
     const button = buttonRef.current;
     if (!button) return;
 
+    const isTouch = 'ontouchstart' in window;
+    if (isTouch) return;
+
     const handleMouseMove = (e) => {
       const rect = button.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-
       button.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
     };
 
@@ -30,6 +32,27 @@ const MagneticButton = ({ children, to, href, onClick, className = '', ...props 
   }, []);
 
   const classes = `magnetic-btn ${className}`.trim();
+
+  if (to && to.startsWith('#')) {
+    // Smooth scroll for anchor links
+    return (
+      <a
+        href={to}
+        className={classes}
+        ref={buttonRef}
+        onClick={(e) => {
+          e.preventDefault();
+          const section = document.getElementById(to.replace('#', ''));
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }}
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
 
   if (to) {
     return (

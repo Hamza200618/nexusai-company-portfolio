@@ -7,9 +7,12 @@ const ServiceCard = ({ service, index }) => {
   const glowRef = useRef(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Vanilla Tilt
+  // Vanilla Tilt (disabled on touch devices)
   useEffect(() => {
-    if (cardRef.current) {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (!cardRef.current || isTouch) return;
+
+    try {
       VanillaTilt.init(cardRef.current, {
         max: 8,
         speed: 400,
@@ -20,11 +23,13 @@ const ServiceCard = ({ service, index }) => {
         easing: 'cubic-bezier(.03,.98,.52,.99)',
         transition: true,
       });
+    } catch (e) {
+      console.warn('VanillaTilt init failed:', e);
     }
 
     return () => {
       if (cardRef.current && cardRef.current.vanillaTilt) {
-        cardRef.current.vanillaTilt.destroy();
+        try { cardRef.current.vanillaTilt.destroy(); } catch (e) {}
       }
     };
   }, []);

@@ -8,7 +8,10 @@ const DemoCard = ({ demo, index }) => {
   const cardRef = useRef(null);
 
   useEffect(() => {
-    if (cardRef.current) {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (!cardRef.current || isTouch) return;
+
+    try {
       VanillaTilt.init(cardRef.current, {
         max: 6,
         speed: 400,
@@ -18,11 +21,15 @@ const DemoCard = ({ demo, index }) => {
         perspective: 1000,
         easing: 'cubic-bezier(.03,.98,.52,.99)',
       });
+    } catch (e) {
+      console.warn('VanillaTilt init failed:', e);
     }
 
     return () => {
       if (cardRef.current && cardRef.current.vanillaTilt) {
-        cardRef.current.vanillaTilt.destroy();
+        try {
+          cardRef.current.vanillaTilt.destroy();
+        } catch (e) {}
       }
     };
   }, []);

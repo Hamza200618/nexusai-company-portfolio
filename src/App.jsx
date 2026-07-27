@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HeroBackground from './components/HeroBackground';
@@ -10,52 +10,72 @@ import useScrollAnimation from './hooks/useScrollAnimation';
 import './styles/global.scss';
 import './App.scss';
 
-const App = () => {
+const AppContent = () => {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   useScrollAnimation();
 
   useEffect(() => {
+    let lenis = null;
+    let rafId = null;
+
     const initLenis = async () => {
-      const Lenis = (await import('@studio-freight/lenis')).default;
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
-        smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 2,
-      });
+      try {
+        const Lenis = (await import('@studio-freight/lenis')).default;
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          wheelMultiplier: 1,
+          touchMultiplier: 2,
+        });
 
-      const raf = (time) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      };
+        const raf = (time) => {
+          if (lenis) {
+            lenis.raf(time);
+          }
+          rafId = requestAnimationFrame(raf);
+        };
 
-      requestAnimationFrame(raf);
-      return lenis;
+        rafId = requestAnimationFrame(raf);
+      } catch (e) {
+        console.warn('Lenis not available:', e);
+      }
     };
 
-    const lenisPromise = initLenis();
+    initLenis();
 
     return () => {
-      lenisPromise.then((lenis) => lenis.destroy());
+      if (rafId) cancelAnimationFrame(rafId);
+      if (lenis) {
+        lenis.destroy();
+        lenis = null;
+      }
     };
   }, []);
 
   return (
+    <div className="app">
+      {isHome && <HeroBackground />}
+      <Navbar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects/:id" element={<ProjectDetail />} />
+          <Route path="/demo/:slug" element={<DemoPage />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+const App = () => {
+  return (
     <Router>
-      <div className="app">
-        <HeroBackground />
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects/:id" element={<ProjectDetail />} />
-            <Route path="/demo/:slug" element={<DemoPage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      <AppContent />
     </Router>
   );
 };

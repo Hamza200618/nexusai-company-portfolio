@@ -216,12 +216,12 @@ const AboutSection = () => {
         </div>
 
         {/* ═══ Animated Counters ═══ */}
-        <div className="about-counters" data-aos="fade-up">
+        {/* <div className="about-counters" data-aos="fade-up">
           <CounterItem value={50} suffix="+" label="Projects Delivered" />
           <CounterItem value={30} suffix="+" label="Team Members" />
           <CounterItem value={98} suffix="%" label="Client Satisfaction" />
           <CounterItem value={24} suffix="/7" label="Support Available" />
-        </div>
+        </div> */}
 
         {/* ═══ Growth Timeline ═══ */}
         <div className="about-timeline" ref={timelineRef}>

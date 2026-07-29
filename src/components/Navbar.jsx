@@ -1,21 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import Button from './Button';
 import './Navbar.scss';
 
 const navLinks = [
-  { path: '/', label: 'Home', sectionId: 'hero' },
-  { path: '#about', label: 'About', sectionId: 'about-section' },
-  { path: '#projects', label: 'Projects', sectionId: 'stats' },
-  { path: '#contact', label: 'Contact', sectionId: 'contact-section' },
+  { label: 'Home', sectionId: 'hero' },
+  { label: 'About', sectionId: 'about-section' },
+  { label: 'Projects', sectionId: 'stats' },
+  { label: 'Contact', sectionId: 'contact-section' },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const location = useLocation();
-  const navigate = useNavigate();
   const navbarRef = useRef(null);
 
   useEffect(() => {
@@ -39,38 +35,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location]);
-
-  const handleNavClick = (e, link) => {
+  const handleNavClick = (e, sectionId) => {
     e.preventDefault();
     setIsMenuOpen(false);
 
-    if (link.path === '/') {
-      if (location.pathname === '/') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate('/');
-      }
+    if (sectionId === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
-    // Scroll to section on home page
-    if (location.pathname === '/') {
-      const section = document.getElementById(link.sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    } else {
-      // Navigate to home then scroll after render
-      navigate('/');
-      setTimeout(() => {
-        const section = document.getElementById(link.sectionId);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 100);
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -80,28 +56,26 @@ const Navbar = () => {
       className={`navbar ${isScrolled || isMenuOpen ? 'navbar--scrolled' : ''} ${isMenuOpen ? 'navbar--open' : ''}`}
     >
       <div className="navbar__container container">
-        <Link to="/" className="navbar__logo" onClick={() => setIsMenuOpen(false)}>
+        <a href="/" className="navbar__logo" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
           <img
             src="/logo.jpeg"
             alt="NexusAI"
             className="navbar__logo-img"
           />
           <span className="navbar__logo-text">NexusAI</span>
-        </Link>
+        </a>
 
         <div className={`navbar__menu ${isMenuOpen ? 'navbar__menu--open' : ''}`}>
           <ul className="navbar__links">
             {navLinks.map((link) => {
-              const isActive = link.path === '/' 
-                ? location.pathname === '/' && activeSection === link.sectionId
-                : activeSection === link.sectionId;
+              const isActive = activeSection === link.sectionId;
               return (
                 <li key={link.sectionId}>
                   <a
-                    href={link.path === '/' ? '/' : link.path}
+                    href={`#${link.sectionId}`}
                     className={`navbar__link ${isActive ? 'navbar__link--active' : ''}`}
                     data-section={link.sectionId}
-                    onClick={(e) => handleNavClick(e, link)}
+                    onClick={(e) => handleNavClick(e, link.sectionId)}
                   >
                     <span className="navbar__link-indicator"></span>
                     {link.label}
@@ -113,7 +87,7 @@ const Navbar = () => {
 
           <div className="navbar__actions">
             <a
-              href="#contact"
+              href="#contact-section"
               className="btn btn--primary btn--sm"
               onClick={(e) => {
                 e.preventDefault();

@@ -2,15 +2,24 @@
 @import '../styles/mixins';
 
 .demo-page {
+  min-height: 100vh;
+  background: $color-bg;
+
   // ── Hero ──
   .demo-hero {
-    min-height: 60vh;
+    min-height: 40vh;
     display: flex;
     align-items: center;
-    padding-top: 80px;
+    padding: 80px $spacing-md 0;
+
+    @include respond(md) {
+      min-height: 60vh;
+      padding: 80px 0 0;
+    }
 
     &__content {
       max-width: 800px;
+      width: 100%;
     }
 
     &__back {
@@ -34,6 +43,7 @@
       align-items: center;
       gap: $spacing-lg;
       margin-bottom: $spacing-lg;
+      flex-wrap: wrap;
     }
 
     &__category {
@@ -65,22 +75,27 @@
 
     &__title {
       font-family: $font-display;
-      font-size: $font-size-5xl;
+      font-size: $font-size-3xl;
       font-weight: $font-weight-extrabold;
       margin-bottom: $spacing-lg;
       line-height: $line-height-tight;
+      word-break: break-word;
 
-      @include respond(md) { font-size: $font-size-6xl; }
+      @include respond(sm) { font-size: $font-size-4xl; }
+      @include respond(md) { font-size: $font-size-5xl; }
+      @include respond(lg) { font-size: $font-size-6xl; }
     }
 
     &__description {
       font-family: $font-primary;
-      font-size: $font-size-lg;
+      font-size: $font-size-base;
       color: $color-text-secondary;
       max-width: 650px;
       line-height: $line-height-relaxed;
       font-weight: $font-weight-light;
       margin-bottom: $spacing-xl;
+
+      @include respond(md) { font-size: $font-size-lg; }
     }
 
     &__tech {
@@ -104,6 +119,10 @@
 
   // ── Video ──
   .demo-video {
+    padding: 0 $spacing-md;
+
+    @include respond(md) { padding: 0; }
+
     &__player {
       @include card-premium;
       overflow: hidden;
@@ -129,9 +148,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: $spacing-lg;
-      padding: $spacing-2xl;
+      gap: $spacing-md;
+      padding: $spacing-lg;
       text-align: center;
+
+      @include respond(md) { gap: $spacing-lg; padding: $spacing-2xl; }
     }
 
     &__icon {
@@ -141,9 +162,11 @@
 
     &__title {
       font-family: $font-display;
-      font-size: $font-size-2xl;
+      font-size: $font-size-xl;
       font-weight: $font-weight-semibold;
       color: $color-text-secondary;
+
+      @include respond(md) { font-size: $font-size-2xl; }
     }
 
     &__hint {
@@ -155,6 +178,8 @@
     &__format {
       display: flex;
       gap: $spacing-md;
+      flex-wrap: wrap;
+      justify-content: center;
 
       span {
         padding: $spacing-xs $spacing-md;
@@ -173,69 +198,96 @@
   // ── Overview ──
   .demo-overview {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: $spacing-3xl;
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
     align-items: start;
+    padding: 0 $spacing-md;
 
-    @include respond(md) { grid-template-columns: 1fr; }
+    @include respond(md) {
+      padding: 0;
+      grid-template-columns: 1.5fr 1fr;
+      gap: $spacing-3xl;
+    }
 
     &__main {
       h2 {
         font-family: $font-display;
-        font-size: $font-size-2xl;
+        font-size: $font-size-xl;
         color: $color-heading;
-        margin-bottom: $spacing-lg;
-        margin-top: $spacing-2xl;
+        margin-bottom: $spacing-md;
+        margin-top: $spacing-xl;
 
         &:first-child { margin-top: 0; }
+
+        @include respond(md) { font-size: $font-size-2xl; margin-top: $spacing-2xl; }
       }
 
       p {
         font-family: $font-primary;
-        font-size: $font-size-base;
+        font-size: $font-size-sm;
         color: $color-text-secondary;
         line-height: $line-height-relaxed;
         font-weight: $font-weight-light;
+
+        @include respond(md) { font-size: $font-size-base; }
       }
     }
 
     &__features {
       display: flex;
       flex-direction: column;
-      gap: $spacing-md;
+      gap: $spacing-sm;
+
+      @include respond(md) { gap: $spacing-md; }
 
       li {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: $spacing-md;
         font-family: $font-primary;
-        font-size: $font-size-base;
+        font-size: $font-size-sm;
         color: $color-text-secondary;
         font-weight: $font-weight-light;
+        line-height: $line-height-relaxed;
 
-        svg { color: $color-neon-blue; flex-shrink: 0; }
+        @include respond(md) { font-size: $font-size-base; }
+
+        svg {
+          color: $color-neon-blue;
+          flex-shrink: 0;
+          margin-top: 3px;
+          width: 16px !important;
+          height: 16px !important;
+
+          @include respond(md) {
+            width: 18px !important;
+            height: 18px !important;
+          }
+        }
       }
     }
 
     &__sidebar {
       display: flex;
       flex-direction: column;
-      gap: $spacing-xl;
-      position: sticky;
-      top: 100px;
+      gap: $spacing-lg;
 
-      @include respond(md) { position: static; }
+      @include respond(md) { gap: $spacing-xl; position: sticky; top: 100px; }
     }
 
     &__card {
       @include card-premium;
-      padding: $spacing-xl;
+      padding: $spacing-lg;
+
+      @include respond(md) { padding: $spacing-xl; }
 
       h3 {
         font-family: $font-display;
-        font-size: $font-size-lg;
+        font-size: $font-size-base;
         color: $color-heading;
-        margin-bottom: $spacing-lg;
+        margin-bottom: $spacing-md;
+
+        @include respond(md) { font-size: $font-size-lg; margin-bottom: $spacing-lg; }
       }
     }
 
@@ -271,29 +323,45 @@
     &__actions {
       display: flex;
       flex-direction: column;
-      gap: $spacing-md;
+      gap: $spacing-sm;
+
+      @include respond(md) { gap: $spacing-md; }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
     }
   }
 
   // ── Challenges & Improvements ──
   .demo-details {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $spacing-3xl;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+    padding: 0 $spacing-md;
 
-    @include respond(md) { grid-template-columns: 1fr; }
+    @include respond(md) {
+      padding: 0;
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-3xl;
+    }
 
     h2 {
       font-family: $font-display;
-      font-size: $font-size-2xl;
+      font-size: $font-size-xl;
       color: $color-heading;
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-lg;
+
+      @include respond(md) { font-size: $font-size-2xl; margin-bottom: $spacing-xl; }
     }
 
     &__list {
       display: flex;
       flex-direction: column;
-      gap: $spacing-lg;
+      gap: $spacing-md;
+
+      @include respond(md) { gap: $spacing-lg; }
     }
 
     &__item {
@@ -301,21 +369,25 @@
       align-items: flex-start;
       gap: $spacing-md;
       font-family: $font-primary;
-      font-size: $font-size-base;
+      font-size: $font-size-sm;
       color: $color-text-secondary;
       line-height: $line-height-relaxed;
       font-weight: $font-weight-light;
+
+      @include respond(md) { font-size: $font-size-base; }
     }
 
     &__icon {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: $radius-md;
       flex-shrink: 0;
       margin-top: 2px;
+
+      @include respond(md) { width: 36px; height: 36px; }
 
       &--challenge {
         background: rgba(245, 158, 11, 0.1);
@@ -331,11 +403,17 @@
 
   // ── Architecture ──
   .demo-architecture {
+    padding: 0 $spacing-md;
+
+    @include respond(md) { padding: 0; }
+
     h2 {
       font-family: $font-display;
-      font-size: $font-size-2xl;
+      font-size: $font-size-xl;
       color: $color-heading;
-      margin-bottom: $spacing-xl;
+      margin-bottom: $spacing-lg;
+
+      @include respond(md) { font-size: $font-size-2xl; margin-bottom: $spacing-xl; }
     }
 
     &__placeholder {
@@ -345,15 +423,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: $spacing-lg;
-      padding: $spacing-2xl;
+      gap: $spacing-md;
+      padding: $spacing-lg;
       text-align: center;
+
+      @include respond(md) { gap: $spacing-lg; padding: $spacing-2xl; }
 
       span {
         font-family: $font-display;
-        font-size: $font-size-xl;
+        font-size: $font-size-lg;
         font-weight: $font-weight-semibold;
         color: $color-text-secondary;
+
+        @include respond(md) { font-size: $font-size-xl; }
       }
 
       p {
@@ -377,12 +459,14 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: 80px;
+    padding: 80px $spacing-md 0;
 
     h1 {
       font-family: $font-display;
-      font-size: $font-size-4xl;
+      font-size: $font-size-3xl;
       margin-bottom: $spacing-md;
+
+      @include respond(md) { font-size: $font-size-4xl; }
     }
 
     p {

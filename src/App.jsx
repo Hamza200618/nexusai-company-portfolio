@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HeroBackground from './components/HeroBackground';
@@ -12,10 +12,7 @@ import './App.scss';
 
 const AppContent = () => {
   const location = useLocation();
-  // HashRouter: pathname is always '/', check hash instead
-  const hash = location.hash;
-  // Show HeroBackground ONLY on the exact home page — hide on ALL other pages including demos
-  const isHome = hash === '#/' || hash === '';
+  const isHome = location.pathname === '/';
   useScrollAnimation();
 
   useEffect(() => {
